@@ -1,7 +1,7 @@
 from configparser import SectionProxy
 import sys
 from typing import Any
-from husocc import HuSocClassifier
+from . import husocc
 
 from annif.project import AnnifProject
 from annif.backend import backend
@@ -23,8 +23,8 @@ class HuSocBackend(backend.AnnifBackend):
     def __init__(self, backend_id: str, config_params: dict[str, Any] | SectionProxy, project: AnnifProject) -> None:
         super().__init__(backend_id, config_params, project)
         # logger.info("HuSocBackend INIT")
-        self.classifier = HuSocClassifier()
-        self.vocab = project.vocab.subjects()
+        self.classifier = husocc.HuSocClassifier()
+        self.vocab = project.vocab.subjects
 
     def initialize(self, parallel: bool = False) -> None:
         # logger.info("HuSocBackend initialize")
